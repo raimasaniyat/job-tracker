@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./assets/style.css">
+    
+    <title>Job Tracker</title>
+    <link rel="icon" href="./assets/jobTrackerImage.png">
+    <link rel="stylesheet" href="./assets/tailwind.init.css">
+</head>
+<body class="bg-[#F8FAFC]">
+    <header>
+        <div class="container w-[80%] mx-auto">
+            <h1 class="text-[#002C5C] text-3xl font-bold my-4">Job Application Tracker</h1>
+            <div class="header-parent grid grid-cols-3 gap-8">
+                <div class="bg-[#fff] p-4 rounded-lg">
+                    <p class="text-[#002C5C]">Total</p>
+                    <h2 id="total" class="text-[#002C5C]">8</h2>
+                </div>
+                <div class="bg-[#fff] p-4 rounded-lg">
+                    <p class="text-[#002C5C]">Interview</p>
+                    <h2 id="interviewCount" class="text-[#10B981]">0</h2>
+                </div>
+                <div class="bg-[#fff] p-4 rounded-lg">
+                    <p class="text-[#002C5C]">Rejected</p>
+                    <h2 id="rejectedCount" class="text-[#EF4444]">0</h2>
+                </div>
+            </div>
+            <hr class="my-10">
+        </div>
+    </header>
+    <section class="available">
+        <div class="container w-[80%] mx-auto">
+            <div class="available-jobs flex justify-between">
+                <h3>Available Jobs</h3>
+                <div class="jobs flex justify-between gap-1.5">
+                    <p id="availableCount" class="text-[#64748B]">8</p>
+                    <p class="text-[#64748B]">jobs</p>
+                </div>
+            </div>
+            <div class="mt-3 mb-2">
+                <button class="bg-[#3B82F6] text-white px-8 py-2 rounded-md " id="allBtn">All</button>
+                <button class="bg-white px-4 py-2 rounded-md text-[#64748B]" id="interviewBtn">Interview</button>
+                <button class="bg-white px-4 py-2 rounded-md text-[#64748B]" id="rejectedBtn">Rejected</button>
+            </div>
+            <main>
+                <div class="card-parent space-y-5">
+                    <div class="card-item flex justify-between bg-white px-5 py-4 rounded-md">
+                        <div class="card-main">
+                            <h4>Mobile First Corp</h4>
+                            <p class="text-[#64748B]">React Native Developer</p>
+                            <p class="my-2.5 text-[#64748B]">Remote • Full-time • $130,000 - $175,000</p>
+                            <button class="bg-[#EEF4FF] w-[120px] text-center p-2">Not Applied</button>
+                            <p class="py-2 text-[#64748B]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+
+                            <div class="indicator flex gap-2">
+                                <button class="interview-btn px-4 py-2 text-[#10B981] border border-[#10B981] rounded-md">interview</button>
+                                <button class="interview-btn px-4 py-2 text-[#EF4444] border border-[#EF4444] rounded-md">Rejected</button>
+                            </div>
+                        </div>
+                        <div class="card-delete">
+                            <a id="cardDelete" class="text-[#64748B]" href="#"><i class="fa-regular fa-trash-can"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+</body>
+</html>
