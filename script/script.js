@@ -30,12 +30,32 @@ function toggleStyle(id){
     rejectedFilterBtn.classList.add('bg-white', 'text-[#64748B]');
 
     const selected = document.getElementById(id);
-    console.log(selected);
+    // console.log(selected);
 
     selected.classList.remove('bg-white', 'text-[#64748B]');
     selected.classList.add('bg-[#3B82F6]', 'text-white');
 }
 
 mainContainer.addEventListener('click', function(event){
-    console.log(event.target);
+    const parNode = event.target.parentNode.parentNode
+
+    const cardTitle = parNode.querySelector('.card-title').innerText;
+    const jobTitle = parNode.querySelector('.job-title').innerText;
+    const speciFication = parNode.querySelector('.specification').innerText;
+    const notAppliedBox = parNode.querySelector('.not-applied-box').innerText;
+    const buildPara = parNode.querySelector('.build-para').innerText;
+
+    const cardInfo = {
+        cardTitle, 
+        jobTitle, 
+        speciFication, 
+        notAppliedBox, 
+        buildPara
+    }
+    
+    const jobExist = interviewList.find(item => item.cardTitle == cardInfo.cardTitle)
+    if(!jobExist){
+        interviewList.push(cardInfo);
+    }
+    console.log(interviewList);
 })
