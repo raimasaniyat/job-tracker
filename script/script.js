@@ -1,5 +1,6 @@
 let interviewList = [];
 let rejectedList =[];
+let currentStatus = 'allBtn';
 
 let total = document.getElementById('total');
 let interviewCount = document.getElementById('interviewCount');
@@ -20,7 +21,7 @@ function calcCount(){
     rejectedCount.innerText = rejectedList.length;
 }
 // console.log(total);
-calcCount()
+// calcCount()
 
 function toggleStyle(id){
     allFilterBtn.classList.remove('bg-[#3B82F6]', 'text-white');
@@ -32,6 +33,7 @@ function toggleStyle(id){
     rejectedFilterBtn.classList.add('bg-white', 'text-[#64748B]');
 
     const selected = document.getElementById(id);
+    currentStatus = id;
     // console.log(selected);
 
     selected.classList.remove('bg-white', 'text-[#64748B]');
@@ -40,10 +42,16 @@ function toggleStyle(id){
     if(id == 'interviewBtn'){
         allCardSection.classList.add('hidden');
         filteredSection.classList.remove('hidden');
+        addInterview()
     }
     else if(id == 'allBtn'){
         allCardSection.classList.remove('hidden');
         filteredSection.classList.add('hidden');
+    }
+    else if(id == 'rejectedBtn'){
+        allCardSection.classList.add('hidden');
+        filteredSection.classList.remove('hidden');
+        addReject()
     }
 }
 
@@ -52,26 +60,64 @@ mainContainer.addEventListener('click', function(event){
     if(event.target.classList.contains('interview-btn')){
         const parNode = event.target.parentNode.parentNode
 
-    const cardTitle = parNode.querySelector('.card-title').innerText;
-    const jobTitle = parNode.querySelector('.job-title').innerText;
-    const speciFication = parNode.querySelector('.specification').innerText;
-    const notAppliedBox = parNode.querySelector('.not-applied-box').innerText;
-    const buildPara = parNode.querySelector('.build-para').innerText;
+        const cardTitle = parNode.querySelector('.card-title').innerText;
+        const jobTitle = parNode.querySelector('.job-title').innerText;
+        const speciFication = parNode.querySelector('.specification').innerText;
+        const notAppliedBox = parNode.querySelector('.not-applied-box').innerText;
+        const buildPara = parNode.querySelector('.build-para').innerText;
 
-    const cardInfo = {
-        cardTitle, 
-        jobTitle, 
-        speciFication, 
-        notAppliedBox, 
-        buildPara
-    }
+        const cardInfo = {
+            cardTitle, 
+            jobTitle, 
+            speciFication, 
+            notAppliedBox, 
+            buildPara
+        }
     
-    const jobExist = interviewList.find(item => item.cardTitle == cardInfo.cardTitle)
-    if(!jobExist){
+        const jobExist = interviewList.find(item => item.cardTitle == cardInfo.cardTitle)
+
+        if(!jobExist){
         interviewList.push(cardInfo);
+        }
+
+        rejectedList = rejectedList.filter(item => item.cardTitle != cardInfo.cardTitle)
+        calcCount()
+
+        if(currentStatus === 'rejectedBtn'){
+            addReject()
+        }
+    
     }
-    addInterview()
-    }
+    else if(event.target.classList.contains('rejected-btn')){
+        const parNode = event.target.parentNode.parentNode
+
+        const cardTitle = parNode.querySelector('.card-title').innerText;
+        const jobTitle = parNode.querySelector('.job-title').innerText;
+        const speciFication = parNode.querySelector('.specification').innerText;
+        const notAppliedBox = parNode.querySelector('.not-applied-box').innerText;
+        const buildPara = parNode.querySelector('.build-para').innerText;
+
+        const cardInfo = {
+            cardTitle, 
+            jobTitle, 
+            speciFication, 
+            notAppliedBox, 
+            buildPara
+        }
+    
+        const jobExist = rejectedList.find(item => item.cardTitle == cardInfo.cardTitle)
+
+        if(!jobExist){
+        rejectedList.push(cardInfo);
+        }
+        
+        interviewList = interviewList.filter(item => item.cardTitle != cardInfo.cardTitle)
+        calcCount()
+
+        if(currentStatus === 'interviewBtn'){
+            addInterview()
+        }
+}
 })
 
 function addInterview(){
@@ -89,6 +135,38 @@ function addInterview(){
                                 <p class="specification my-2.5 text-[#64748B]">${interview.speciFication}</p>
                                 <p class="not-applied-box bg-[#EEF4FF] w-[120px] text-center p-2">Not Applied</p>
                                 <p class="build-para py-2 text-[#64748B]">${interview.buildPara}</p>
+
+                                <div class="indicator flex gap-2">
+                                    <button class="interview-btn px-4 py-2 text-[#10B981] border border-[#10B981] rounded-md">interview</button>
+                                    <button class="rejected-btn px-4 py-2 text-[#EF4444] border border-[#EF4444] rounded-md">Rejected</button>
+                                </div>
+                            </div>
+                            <div class="card-delete">
+                                <a class="cardDelete text-[#64748B]" href="#"><i class="fa-regular fa-trash-can"></i></a>
+                            </div>
+                        </div>
+        `
+        console.log(div);
+        filteredSection.appendChild(div);
+    }
+    
+}
+
+function addReject(){
+    filteredSection.innerHTML = ''
+
+    for(let reject of rejectedList){
+        let div = document.createElement('div');
+
+        div.className = 'card-item bg-white px-5 py-4 rounded-md'
+        div.innerHTML =`
+        <div class="card-inner flex justify-between">
+                            <div class="card-main">
+                                <h4 class="card-title">${reject.cardTitle}</h4>
+                                <p class="job-title text-[#64748B]">${reject.jobTitle}</p>
+                                <p class="specification my-2.5 text-[#64748B]">${reject.speciFication}</p>
+                                <p class="not-applied-box bg-[#EEF4FF] w-[120px] text-center p-2">Not Applied</p>
+                                <p class="build-para py-2 text-[#64748B]">${reject.buildPara}</p>
 
                                 <div class="indicator flex gap-2">
                                     <button class="interview-btn px-4 py-2 text-[#10B981] border border-[#10B981] rounded-md">interview</button>
