@@ -12,7 +12,6 @@ const interviewFilterBtn = document.getElementById('interviewBtn');
 const rejectedFilterBtn = document.getElementById('rejectedBtn');
 
 const mainContainer = document.getElementById('button-parent');
-console.log(mainContainer);
 
 function calcCount(){
     total.innerText = allCardSection.children.length;
@@ -36,3 +35,7 @@ function toggleStyle(id){
     selected.classList.remove('bg-white', 'text-[#64748B]');
     selected.classList.add('bg-[#3B82F6]', 'text-white');
 }
+
+mainContainer.addEventListener('click', function(event){
+    console.log(event.target);
+})
